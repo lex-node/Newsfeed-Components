@@ -118,11 +118,13 @@ const articleCreator = (obj) => {
     article.classList.add('article');
     const titleHeader = document.createElement('h2');
     const dateElement = document.createElement('p');
+    dateElement.classList.add('date');
     const paraElement1 = document.createElement('p');
     const paraElement2 = document.createElement('p');
     const paraElement3 = document.createElement('p');
     const buttonSpanElement = document.createElement('span');
     buttonSpanElement.classList.add('expandButton');
+    buttonSpanElement.textContent = 'open article?';
 
     //hydrate elements using data from obj argument
     titleHeader.textContent = obj.title;
@@ -132,7 +134,7 @@ const articleCreator = (obj) => {
     paraElement3.textContent = obj.thirdParagraph;
 
     //event listeners
-    const clickHandler = (e => article.toggle('article-open'));
+    const clickHandler = (() => article.classList.toggle('article-open'));
     buttonSpanElement.addEventListener('click', clickHandler, false);
 
     //stitch elements together
@@ -146,6 +148,10 @@ const articleCreator = (obj) => {
     //output complete element
     return article;
 }
+
+/**************************
+ APPEND ARTICLES TO WEBPAGE
+ ***************************/
 
 data.forEach(datum => document.querySelector('.articles').appendChild(articleCreator(datum)));
 
